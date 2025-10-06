@@ -1,0 +1,21 @@
+name: Baseline CI
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  baseline-check:
+    name: Check Web Feature Compatibility
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Baseline CI
+        uses: nishant-gh/baseline-ci-action@v0.1.0-alpha
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          # Optional: Customize based on your needs
+          # severity: 'fail'        # 'warn' or 'fail'
+          # target-baseline: 'widely'  # 'widely', 'newly', or 'all'
